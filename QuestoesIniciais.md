@@ -1,3 +1,7 @@
+<h1>Questões Iniciais 📝🖥️</h1>
+
+<h2>Sistemas Operacionais</h2>
+
 <h3> 1. Como vocês definem o que é um Sistema Operacional? </h3>
 
 > R: Um sistema operacional, na computação, é um conjunto de programas que permite o gerenciamento dos hardwares e softwares, periféricos, armazenamento, entrada e saída e permite gerenciar downloads, configurações específicas do usuário e utilizar programas, isso tudo com Interface. Exemplos de sistemas operacionais: Windows, IOS, Linux, etc...
