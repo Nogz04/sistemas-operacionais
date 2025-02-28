@@ -35,10 +35,12 @@
 
 > O ciclo básico de execução de uma instrução envolve os seguintes passos:
 
-> **Busca (Fetch):** A CPU busca a próxima instrução da memória (RAM).
+> **Busca (Fetch):** A CPU busca a próxima instrução da memória (RAM) -> (Load).
 > <br>**Decodificação (Decode):** A CPU decodifica a instrução para entender qual operação precisa ser executada.
+> <br>**Busca (Fetch):** Busca na memória os operadores -> (Load)
 > <br>**Execução (Execute):** A CPU executa a operação, seja uma operação aritmética, lógica, ou de movimentação de dados.
 > <br>**Escrita (Write):** Se necessário, a CPU escreve o resultado de volta na memória ou nos registradores.
+> <br>**Atualiza (Update):** Atualiza o endereço da próxima instrução
 
 <h3>7. Caracterize a estrutura de armazenamento de um sistema de computação.</h3>
 
