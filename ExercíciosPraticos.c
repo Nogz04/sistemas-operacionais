@@ -1,6 +1,6 @@
 //1 – Crie um programa com dois processos. As medidas de um terreno retangular devem ser
 //lidas. O processo Filho deve calcular a área do terreno e o processo Pai o perímetro. Todos
-//os resultados obtidos devem ser mostrados ao usuário.
+//os resultados obtidos devem ser mostrados ao usuário
 
 #include <stdio.h>
 #include <stdlib.h>
