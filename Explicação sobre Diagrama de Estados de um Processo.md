@@ -13,3 +13,13 @@
 > 5- Caso nao haja interrupção, ele irá voltar ao estado pronto e irá guardar na memória o contexto do processo.
 
 > 6 - Caso tenha uma operacao de I/O ou evento, durante a execucao do processo, no caso alguém estar digitando um printf ou algo, sem estiver concluido, ele sera colocado em espera até o final da conclusao de I/O ou evento, após concluir a escrita, ele voltará ao estado pronto.
+
+<h3>Filas e escalonadores</h3>
+
+> - Temos filas em NOVO, PRONTO & Em Espera
+ 
+> NOVO: Escalonador de Longo Prazo
+> PRONTO: Escalonador de Curto Prazo
+> EM ESPERA: Escalonador de longo prazo
+
+Escalonador de médio prazo: Swaping
