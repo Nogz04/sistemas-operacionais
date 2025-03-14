@@ -16,10 +16,12 @@
 
 <h3>Filas e escalonadores</h3>
 
-> - Temos filas em NOVO, PRONTO & Em Espera
+> Temos filas em NOVO, PRONTO & Em Espera
  
-> NOVO: Escalonador de Longo Prazo
-> PRONTO: Escalonador de Curto Prazo
-> EM ESPERA: Escalonador de longo prazo
+> NOVO: Escalonador de Longo Prazo, pois as vezes ningúem esta mexendo no PC sem abrir arquivos
+
+> PRONTO: Escalonador de Curto Prazo, pois caso haja processos na fila, ele irá ser executado em fila rápida
+
+> EM ESPERA: Escalonador de longo prazo, pois em relação ao tempo de processador ele tem frequência de minutos
 
 Escalonador de médio prazo: Swaping
