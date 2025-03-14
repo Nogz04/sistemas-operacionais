@@ -24,4 +24,22 @@
 
 > EM ESPERA: Escalonador de longo prazo, pois em relação ao tempo de processador ele tem frequência de minutos
 
+
 Escalonador de médio prazo: Swaping
+
+
+<h2>QUESTÕES</h2>
+
+- É correto afirmar que devido a Multiprogramação há uma menor utilização do processador? Justifique.
+
+  > Sim, pois devido a utilização do escalonador para escolher e priorizar processos específicos e com o sistemas de filas, ajuda o processador a não sobrecarregar.
+  
+- A partir do conceito de processo, justifique o escalonamento de processos
+
+  > O escalonamento de processos faz a priorização e seleção de qual processo ele irá escolher para executar, no caso do escalonador do processador, o escalonamento irá decidir quais processos irá utilizar ele
+
+- Caracterize o que é um processo em Sistemas Operacionais. Inclua nesta caracterização, o bloco descritor de processo.
+
+  > Processo é um executavel que foi executado no sistema, ele irá abrir um processo ao ser executado. Um arquivo antes de ser executado, ele só está no disco, após ser executado ele vira um processo.
+  
+  > PCB (bloco descritor de processo): Ele é digamos que um struct, que armazena informações de tudo que ocorreu durante o processo ao final de um chaveamento de contexto. Após uma interrupção, ele guarda as informações no PCB para retoma-las quando necessario
