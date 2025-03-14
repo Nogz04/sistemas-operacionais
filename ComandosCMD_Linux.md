@@ -49,3 +49,5 @@ laboratorio@lab25dt09:~/Documentos$ rmdir aluno
 
 laboratorio@lab25dt09:~/Documentos$ strace pwd
 
+//
+
