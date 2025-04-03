@@ -25,7 +25,7 @@ e) L5 = {w| w possui sufixo ba e prefixo ab}
 
 <h2>2) Construa os Autômatos Finitos que reconheçam as linguagens geradas pelas Expressões Regulares:</h2>
 
-Software: JFLAP
+Software utilizado: JFLAP
 
 i. (b+ab)*
 
@@ -44,8 +44,42 @@ iii. (ab+ba)*(aa+bb)
 
 iv. ab(abb*+baa*)*ba
 
-> Foto
+> ![image](https://github.com/user-attachments/assets/cf1f72a3-8838-433e-8067-c731d0a73fa3)
 
 v. (aa+b)*(a+bb)
 
-> Foto
+> ![image](https://github.com/user-attachments/assets/3ef35b83-1229-43b3-98e1-3cea858b9f20)
+
+vi. a*(aa+bb)
+
+> ![image](https://github.com/user-attachments/assets/e4d7e395-0437-459b-983b-bba41bea40fa)
+
+vii. b*ab*ab*
+
+> ![image](https://github.com/user-attachments/assets/b5e169be-f1a4-427c-bcc7-d85ffda55433)
+
+viii. (b+ab)*(Ɛ+a)
+
+> ![image](https://github.com/user-attachments/assets/c76c1e8b-2831-4e55-92c9-491b7ed6801e)
+
+ix. (aa+bb)*(ab)*
+
+> ![image](https://github.com/user-attachments/assets/b4fc86df-9670-4bda-985e-f84c64ef4f9f)
+
+
+x. (ab+ba)*(aa+bb)*
+
+> ![image](https://github.com/user-attachments/assets/d22ffee3-dd90-4e55-ae18-4748cfa7530f)
+
+
+xi. (0+1)* (00+01+10+11) (0+1)*
+
+> ![image](https://github.com/user-attachments/assets/37bc2cd3-4a94-4f74-8dcb-505263c88791)
+
+<h2>3) Dadas as Expressões Regulares sobre ∑={a, b}, identifique quais linguagens são denotadas:</h2>
+
+i. (aa+b)*(a+aa)
+ii. (b+ab)*( +a)
+iii. (ab+ba) (b+a)*
+iv. (0+1)* 111 (0+1)*
+v. (0+1)* (10+01)
