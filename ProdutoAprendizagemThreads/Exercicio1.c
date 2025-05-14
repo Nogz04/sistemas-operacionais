@@ -3,84 +3,126 @@
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 
-#define N 4  // Número de linhas
-#define M 4  // Número de colunas
-
-// Matrizes globais
-int A[N][M], B[N][M], C[N][M];
-
-// Estrutura para passar parâmetros para as threads
+// Estrutura de dados para passar informações às threads
 typedef struct {
-    int linha;
-} ThreadData;
+    int **A;
+    int **B;
+    int **C;
+    int linha_inicio;
+    int linha_fim;
+    int colunas;
+} DadosThread;
 
-// Função que soma as linhas das matrizes
-void* soma_linha(void* arg) {
-    ThreadData* data = (ThreadData*)arg;
-    int i = data->linha;
+// Função que será executada por cada thread
+void *soma_matrizes(void *arg) {
+    DadosThread *dados = (DadosThread *) arg;
 
-    for (int j = 0; j < M; j++) {
-        C[i][j] = A[i][j] + B[i][j];  // Soma elemento por elemento
+    for (int i = dados->linha_inicio; i < dados->linha_fim; i++) {
+        for (int j = 0; j < dados->colunas; j++) {
+            dados->C[i][j] = dados->A[i][j] + dados->B[i][j];
+        }
     }
 
-    pthread_exit(NULL);  // Finaliza a execução da thread
+    pthread_exit(NULL);
 }
 
-// Função para gerar uma matriz aleatória
-void gerar_matriz_aleatoria(int matriz[N][M]) {
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < M; j++) {
-            matriz[i][j] = rand() % 10;  // Gera números aleatórios entre 0 e 9
+// Função para alocar matriz dinamicamente
+int **alocar_matriz(int linhas, int colunas) {
+    int **matriz = malloc(linhas * sizeof(int *));
+    for (int i = 0; i < linhas; i++) {
+        matriz[i] = malloc(colunas * sizeof(int));
+    }
+    return matriz;
+}
+
+// Função para liberar memória de matriz
+void liberar_matriz(int **matriz, int linhas) {
+    for (int i = 0; i < linhas; i++) {
+        free(matriz[i]);
+    }
+    free(matriz);
+}
+
+// Função para preencher matriz com valores digitados pelo usuário
+void preencher_matriz(int **matriz, int linhas, int colunas, const char *nome) {
+    printf("Digite os elementos da matriz %s:\n", nome);
+    for (int i = 0; i < linhas; i++) {
+        for (int j = 0; j < colunas; j++) {
+            printf("%s[%d][%d]: ", nome, i, j);
+            scanf("%d", &matriz[i][j]);
         }
     }
 }
 
-// Função para imprimir uma matriz
-void imprimir_matriz(int matriz[N][M]) {
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < M; j++) {
-            printf("%d ", matriz[i][j]);
+// Função para imprimir matriz
+void imprimir_matriz(const char *nome, int **matriz, int linhas, int colunas) {
+    printf("Matriz %s:\n", nome);
+    for (int i = 0; i < linhas; i++) {
+        for (int j = 0; j < colunas; j++) {
+            printf("%4d ", matriz[i][j]);
         }
         printf("\n");
     }
+    printf("\n");
 }
 
 int main() {
-    // Inicializa o gerador de números aleatórios com o tempo atual
-    srand(time(NULL));
+    int linhas, colunas, num_threads;
 
-    // Gerar matrizes A e B aleatórias
-    printf("Matriz A:\n");
-    gerar_matriz_aleatoria(A);
-    imprimir_matriz(A);
+    // Leitura das dimensões e número de threads
+    printf("Informe o número de linhas: ");
+    scanf("%d", &linhas);
 
-    printf("\nMatriz B:\n");
-    gerar_matriz_aleatoria(B);
-    imprimir_matriz(B);
+    printf("Informe o número de colunas: ");
+    scanf("%d", &colunas);
+
+    printf("Informe o número de threads: ");
+    scanf("%d", &num_threads);
+
+    // Alocação das matrizes
+    int **A = alocar_matriz(linhas, colunas);
+    int **B = alocar_matriz(linhas, colunas);
+    int **C = alocar_matriz(linhas, colunas);
+
+    // Preenchimento das matrizes A e B
+    preencher_matriz(A, linhas, colunas, "A");
+    preencher_matriz(B, linhas, colunas, "B");
 
     // Criação das threads
-    pthread_t threads[N];  // Um thread para cada linha
-    ThreadData data[N];    // Estrutura para armazenar o índice da linha
+    pthread_t threads[num_threads];
+    DadosThread dados[num_threads];
 
-    // Criando uma thread para cada linha
-    for (int i = 0; i < N; i++) {
-        data[i].linha = i;
-        if (pthread_create(&threads[i], NULL, soma_linha, (void*)&data[i]) != 0) {
-            perror("Falha ao criar a thread");
-            return 1;
-        }
+    int linhas_por_thread = linhas / num_threads;
+    int linha_atual = 0;
+
+    for (int i = 0; i < num_threads; i++) {
+        dados[i].A = A;
+        dados[i].B = B;
+        dados[i].C = C;
+        dados[i].colunas = colunas;
+        dados[i].linha_inicio = linha_atual;
+        dados[i].linha_fim = (i == num_threads - 1) ? linhas : linha_atual + linhas_por_thread;
+
+        pthread_create(&threads[i], NULL, soma_matrizes, &dados[i]);
+
+        linha_atual = dados[i].linha_fim;
     }
 
-    // Aguardando todas as threads terminarem
-    for (int i = 0; i < N; i++) {
+    // Espera pelo término de todas as threads
+    for (int i = 0; i < num_threads; i++) {
         pthread_join(threads[i], NULL);
     }
 
-    // Imprimindo a matriz resultado
-    printf("\nMatriz C (resultado da soma):\n");
-    imprimir_matriz(C);
+    // Impressão do resultado
+    imprimir_matriz("A", A, linhas, colunas);
+    imprimir_matriz("B", B, linhas, colunas);
+    imprimir_matriz("C (A + B)", C, linhas, colunas);
+
+    // Liberação da memória
+    liberar_matriz(A, linhas);
+    liberar_matriz(B, linhas);
+    liberar_matriz(C, linhas);
 
     return 0;
 }
