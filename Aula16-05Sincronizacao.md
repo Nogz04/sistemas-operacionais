@@ -77,4 +77,11 @@ X.P();
 transmitir_Folha();  
 ```
 
+# Exercício:
+[SOLista6.pdf](https://github.com/user-attachments/files/20244308/SOLista6.pdf)
+
+![{6A2D7ADC-7CA1-4478-BCA8-04AF4B55B871}](https://github.com/user-attachments/assets/05083cdc-b9a2-43d0-a825-827beffe9512)
+
+
+
 
